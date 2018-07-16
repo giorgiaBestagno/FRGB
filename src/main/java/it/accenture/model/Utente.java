@@ -12,6 +12,9 @@ public class Utente {
     private String indirizzo;
     private List<Prodotto> listaOrdine;
     private List<Prodotto> listaAcquisti;
+    
+    
+    
 	public int getIdUtente() {
 		return idUtente;
 	}

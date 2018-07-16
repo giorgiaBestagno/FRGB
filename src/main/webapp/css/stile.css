@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+input[type="text"] {
+	width: 200px;
+	margin: 13px ;
+	border: 1px solid grey;
+	border-radius: 5px;
+	padding: 1%;
+	}
+	
+input[type="submit"] {
+		border-radius: 5px;
+			padding: 1%;
+			border: 1px solid grey;
+	
+}
+

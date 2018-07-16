@@ -10,7 +10,7 @@ public interface ProdottoDao {
 	
 	public List<Prodotto> listaProdottiDisponibili(int quantitaDisponibile);
 	public List<Prodotto> listaProdottiInOfferta();
-	public List<Prodotto> listaProdottiPerCategoria(Categoria categoria);
+	public List<Prodotto> listaProdottiPerCategoria(String categoria);
 	public Prodotto dettaglioProdotto(int idProdotto);
 	public void close();
 }

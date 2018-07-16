@@ -17,6 +17,7 @@ public class DBUtilityConnection {
 		
 		try {
 			connection = DriverManager.getConnection(CostantiConnessione.DB_URL, CostantiConnessione.DB_USERNAME, CostantiConnessione.DB_PASSWORD);
+			System.out.println("connessione avvenuta con successo");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -12,17 +12,16 @@ import java.util.List;
 import it.accenture.model.Acquisto;
 import it.accenture.model.Prodotto;
 import it.accenture.model.Spedizione;
-import it.accenture.utilites.DBUtilityConnection;
+import it.accenture.utilities.DBUtilityConnection;
 
 public class AcquistoDaoImpl implements AcquistoDao{
 	private Connection connection;
 	private Statement statement;
 	private PreparedStatement prepared;
 	
-	public void AcqistoDaoImpl(){
+	public void AcquistoDaoImpl(){
 		connection = DBUtilityConnection.getConnection();
 	}
-	//Io sono un commento inutile
 	
 	
 	public Acquisto insertAcquisto (int idProdotto){
@@ -72,7 +71,7 @@ public class AcquistoDaoImpl implements AcquistoDao{
 			rs = prepared.executeQuery();
 			while (rs.next()){
 				Acquisto acquisto = new Acquisto();
-				acquisto.setIdAquisto(rs.getInt(1));
+				acquisto.setIdAcquisto(rs.getInt(1));
 				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(2)));
 				acquisto.setDataInizio(rs.getDate(3).toLocalDate());
 				acquisto.setDataFine(rs.getDate(4).toLocalDate());
@@ -111,7 +110,7 @@ public class AcquistoDaoImpl implements AcquistoDao{
 			rs= statement.executeQuery(query);			
 			while (rs.next()){
 				Acquisto acquisto = new Acquisto();
-				acquisto.setIdAquisto(rs.getInt(1));
+				acquisto.setIdAcquisto(rs.getInt(1));
 				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(2)));
 				acquisto.setDataInizio(rs.getDate(3).toLocalDate());
 				acquisto.setDataFine(rs.getDate(4).toLocalDate());

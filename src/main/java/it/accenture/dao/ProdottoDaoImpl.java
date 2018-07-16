@@ -106,13 +106,13 @@ public class ProdottoDaoImpl implements ProdottoDao{
 		return listaProdottiOfferta;
 	}	
 
-	public List<Prodotto> listaProdottiPerCategoria(Categoria categoria) {
+	public List<Prodotto> listaProdottiPerCategoria(String categoria) {
 		List<Prodotto> listaProdottiPerCategoria = new ArrayList<>();
 		String query = "select * from prodotto where categoria = ?";
 		ResultSet resultSet = null;
 		try {
 			prepared=connection.prepareStatement(query);
-			prepared.setString(1, categoria.toString());
+			prepared.setString(1, categoria);
 			resultSet= prepared.executeQuery();
 			while(resultSet.next()){
 				Prodotto prodotto = new Prodotto();
