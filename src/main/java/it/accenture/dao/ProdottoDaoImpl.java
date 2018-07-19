@@ -24,7 +24,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 
 	}
 
-	public List<Prodotto> listaProdottiDisponibili(int quantitaDisponibile) {
+	public List<Prodotto> listaProdottiDisponibili() {
 		
 		List<Prodotto> listaProdotti = new ArrayList<>();
 		String query = "select * from prodotto where quantita_disponibile > 0";
@@ -32,7 +32,91 @@ public class ProdottoDaoImpl implements ProdottoDao{
 		
 		try {
 			statement=connection.createStatement();
-			statement.executeQuery(query);
+			resultSet= statement.executeQuery(query);
+			
+			
+			while(resultSet.next()){
+				Prodotto prodotto = new Prodotto();
+				prodotto.setIdProdotto(resultSet.getInt(1));
+				prodotto.setNome(resultSet.getString(2));
+				prodotto.setCategoria(Categoria.valueOf(resultSet.getString(3)));
+				prodotto.setMarca(resultSet.getString(4));
+				prodotto.setPrezzo(resultSet.getDouble(5));
+				prodotto.setOfferta(resultSet.getBoolean(6));
+				prodotto.setSconto(resultSet.getInt(7));
+				prodotto.setQuantitaDisponibile(resultSet.getInt(8));
+				prodotto.setImmagine(resultSet.getString(9));
+				listaProdotti.add(prodotto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(resultSet != null){
+					resultSet.close();
+				}
+				if (statement != null){
+					statement.close();
+				}
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return listaProdotti;
+	}
+	public Prodotto getProdottoById(int idProdotto) {
+		Prodotto prodotto = new Prodotto();
+		String query ="select * from prodotto where id=? ";
+		ResultSet resultSet= null;
+		try {
+			prepared= connection.prepareStatement(query);
+			prepared.setInt(1, idProdotto);
+			resultSet= prepared.executeQuery();
+			
+			while(resultSet.next()){
+				prodotto.setIdProdotto(resultSet.getInt(1));
+				prodotto.setNome(resultSet.getString(2));
+				prodotto.setCategoria(Categoria.valueOf(resultSet.getString(3)));
+				prodotto.setMarca(resultSet.getString(4));
+				prodotto.setPrezzo(resultSet.getDouble(5));
+				prodotto.setOfferta(resultSet.getBoolean(6));
+				prodotto.setSconto(resultSet.getInt(7));
+				prodotto.setQuantitaDisponibile(resultSet.getInt(8));
+				prodotto.setImmagine(resultSet.getString(9));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(resultSet != null){
+					resultSet.close();
+				}
+				if (prepared != null){
+					prepared.close();
+				}
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+
+		return prodotto;
+	
+	}
+	
+
+	public List<Prodotto> listaProdottiNomiSimili(String ricerca) {
+		
+		List<Prodotto> listaProdotti = new ArrayList<>();
+		String query = "select * from prodotto where quantita_disponibile > 0 and nome like '%"
+				+ ricerca + 
+				"%'";
+		ResultSet resultSet = null;
+		
+		try {
+			statement=connection.createStatement();
+			resultSet= statement.executeQuery(query);
 			
 			
 			while(resultSet.next()){
@@ -69,11 +153,11 @@ public class ProdottoDaoImpl implements ProdottoDao{
 
 	public List<Prodotto> listaProdottiInOfferta() {
 		List<Prodotto> listaProdottiOfferta = new ArrayList<>();
-		String query = "select * from prodotto where offerta <> 0";
+		String query = "select * from prodotto where offerta <> 0 and quantita_disponibile >0 ";
 		ResultSet resultSet = null;
 		try {
 			statement=connection.createStatement();
-			statement.executeQuery(query);
+			resultSet= statement.executeQuery(query);
 				
 			while(resultSet.next()){
 				Prodotto prodotto = new Prodotto();
@@ -108,7 +192,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 
 	public List<Prodotto> listaProdottiPerCategoria(String categoria) {
 		List<Prodotto> listaProdottiPerCategoria = new ArrayList<>();
-		String query = "select * from prodotto where categoria = ?";
+		String query = "select * from prodotto where categoria = ? and quantita_disponibile> 0";
 		ResultSet resultSet = null;
 		try {
 			prepared=connection.prepareStatement(query);
@@ -147,7 +231,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 
 	public Prodotto dettaglioProdotto(int idProdotto) {
 		Prodotto prodotto = new Prodotto();
-		String query ="select * from prodotto p inner join recensione r on p.id = r.id_prodotto where id=? ";
+		String query ="select * from prodotto p inner join recensione r on p.id = r.id_prodotto where p.id=? ";
 		ResultSet resultSet= null;
 		try {
 			prepared= connection.prepareStatement(query);
@@ -184,6 +268,13 @@ public class ProdottoDaoImpl implements ProdottoDao{
 		return prodotto;
 	
 	}
+	
+	@Override
+	public void updateQuantita(int idProdotto, int quantita) {
+		
+	}
+
+
 
 	public void close() {
 		if (connection != null) {
@@ -196,7 +287,6 @@ public class ProdottoDaoImpl implements ProdottoDao{
 		
 	}
 
-	
 	
 
 }

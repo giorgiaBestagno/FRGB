@@ -1,10 +1,13 @@
 function validazione(){
 	
 	var nome = document.getElementById('nome').value;
+	var cognome = document.getElementById('cognome').value;
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
-	console.log(nome + "-" + username + "-" + password);
-	if (nome != '' & username != '' & password != '') {
+	var indirizzo = document.getElementById('indirizzo').value;
+
+	console.log(nome + "-" + cognome + "-" + username + "-" + password + "-" + indirizzo);
+	if (nome != '' & cognome != '' & username != '' & password != '' & indirizzo != '') {
 		return true;
 	} else {
 		document.getElementById('alert').style.display = 'block';
@@ -28,6 +31,4 @@ function validazioneLogin(){
 		return false;
 	}
 
-	
 }
-

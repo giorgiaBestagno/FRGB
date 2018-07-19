@@ -163,6 +163,45 @@ public class UtenteDaoImpl implements UtenteDao {
 			}
 		}
 	}
+
+			public Utente getByUsernameAndPassword(String username, String password) {
+			Utente utente = null;
+			String query = "select * from utente where username = ? and password = ?";
+			
+			ResultSet resultSet = null;
+			try {
+				prepared = connection.prepareStatement(query);
+				prepared.setString(1, username);
+				prepared.setString(2,password);
+				resultSet = prepared.executeQuery();
+				
+				if(resultSet.next()){
+					utente = new Utente();
+					utente.setIdUtente(resultSet.getInt(1));
+					utente.setNome(resultSet.getString(2));
+					utente.setUsername(username);
+					utente.setPassword(password); 
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				
+				try{
+					if (resultSet != null){
+						resultSet.close();
+					
+				}if (prepared!= null){
+					prepared.close();
+				}
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+			}
+			return utente;
+		}
+		
 }
 
 

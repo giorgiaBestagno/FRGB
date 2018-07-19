@@ -11,6 +11,22 @@ public class Acquisto {
 	private int quantitaAcquistata;
 	private int idUtente;
 	private int idProdotto;
+	
+	
+	
+	
+	
+	
+	public Acquisto(Spedizione spedizione, LocalDate dataInizio, LocalDate dataFine, int quantitaAcquistata,
+			int idUtente, int idProdotto) {
+		super();
+		this.spedizione = spedizione;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+		this.quantitaAcquistata = quantitaAcquistata;
+		this.idUtente = idUtente;
+		this.idProdotto = idProdotto;
+	}
 	public int getIdAcquisto() {
 		return idAcquisto;
 	}

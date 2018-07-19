@@ -1,4 +1,4 @@
-<%@page import="it.accenture.model.Utente"%>
+ <%@page import="it.accenture.model.Utente"%>
 <%@page import="it.accenture.model.Prodotto"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -23,9 +23,12 @@
 
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
-<li><a href=" contatti.jsp" style="color: white">Contatti</a></li>
+
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
+<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white">
+</form>
+<li><a href="contatti.jsp" style="color: white">Contatti</a></li>
 <%if (utenteLoggato == null){ %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
 <li><a href="login.jsp" style="color: white;" >Login</a></li>
@@ -35,13 +38,13 @@
 
 <% }else { %>
 
-<form action="categoria.jsp" method="get">
+<form action="categoria" method="get">
 
 <label style="color:white;">Categorie</label>
-<select name="scelta" onchange="location.href = categoria.jsp;">
+<select name="scelta">
 <option value="#" selected="selected">------</option>
-<option value="ABBIGLIAMENTO">Abbigliamento</option> 
-<option value="ARTE">Arte</option> 
+<option value="ABBIGLIAMENTO" >Abbigliamento</option> 
+<option value="ARTE" >Arte</option> 
 <option value="CASA">Casa</option> 
 <option value="CUCINA">Cucina</option> 
 <option value="ELETTRONICA">Elettronica</option> 
@@ -50,16 +53,16 @@
 <option value="GIOCATTOLI">Giocattoli</option> 
 <option value="LIBRI">Libri</option> 
 <option value="SPORT">Sport</option> 
-<option value="offerta.jsp" style="background-color:#e91e63; color:white">Prodotti in offerta</option> 
-
 </select>
+<input type= "submit" value="Vai">
 </form>
 
-<li><a href="account.jsp" style="color: white">Il Mio Account </a></li>
-<li><a href ="index.jsp" style="color: white">Logout</a></li>
-<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
-<li><a href ="ordini.jsp" style="color: white">Ordini In Corso</a></li>
-<li><a href ="acquisti.jsp" style="color: white">I Miei Acquisti</a></li>
+<li><a href="accountDati" style="color: white">Il Mio Account </a></li>
+<li><a href ="logout " style="color: white">Logout</a></li>
+<li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
+<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
+<li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
 
 <%} %>

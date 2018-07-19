@@ -11,11 +11,11 @@ public interface AcquistoDao {
 	
 	
 	
-	public Acquisto insertAcquisto (int idProdotto);
+	public void insertAcquisto (Acquisto acquisto);
 	
-	public List<Acquisto> getAll();
+	public List<Acquisto> getAll(int idUtente);
 	
-	public List<Acquisto> getElementByDataFine();
+	public List<Acquisto> getElementByDataFine(int idUtente);
 	
 	public void close();	
 }

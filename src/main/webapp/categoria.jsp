@@ -1,4 +1,4 @@
-<%@page import="it.accenture.model.Categoria"%>
+ <%@page import="it.accenture.model.Categoria"%>
 <%@page import="it.accenture.dao.ProdottoDaoImpl"%>
 <%@page import="it.accenture.model.Prodotto"%>
 <%@page import="java.util.List"%>
@@ -20,6 +20,9 @@
 <body>
 
 <% Utente utenteLoggato = (Utente) session.getAttribute ("utenteLoggato"); %>
+
+
+
 <%String cat =  request.getParameter("scelta"); %>
 
 <h1>Lista Prodotti in <% out.println(cat); %></h1>
@@ -34,15 +37,20 @@ List<Prodotto> listaProdotti = dao.listaProdottiPerCategoria(cat);
 <% for (Prodotto prodotto: listaProdotti) { %>
 <li>
 <p>
-<%=prodotto.getIdProdotto() %>
-<%=prodotto.getNome() %>
-<%=prodotto.getCategoria() %>
-<%=prodotto.getMarca() %>
-<%=prodotto.getPrezzo() %>
-<%=prodotto.isOfferta()%>
-<%=prodotto.getSconto() %>
-<%=prodotto.getQuantitaDisponibile() %>
-<%=prodotto.getImmagine() %>
+Id Prodotto : <%=prodotto.getIdProdotto() %>
+<br>
+Nome Prodotto : <%=prodotto.getNome() %>
+<br>
+Categoria Prodotto : <%=prodotto.getCategoria() %><br>
+Marca Prodotto : <%=prodotto.getMarca() %><br>
+Prezzo Prodotto : <%=prodotto.getPrezzo() %><br>
+Offerta : <%=prodotto.isOfferta()%><br>
+Sconto : <%=prodotto.getSconto() %><br>
+Quantità disponibile : <%=prodotto.getQuantitaDisponibile() %><br>
+<img src= "<%=prodotto.getImmagine() %>"><br>
+
+<input type="button" value="Acquista" onclick="acquista.jsp">
+<input type="button" value="Aggiungi al carrello" onclick="carrello.jsp">
 
 </p>
 

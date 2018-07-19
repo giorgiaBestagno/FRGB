@@ -23,9 +23,9 @@
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
 <input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
-<li><a href=" contatti.jsp" style="color: white">Contatti</a></li>
+<li><a href=" contatti" style="color: white">Contatti</a></li>
 
 <% if (utenteLoggato == null) { %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>

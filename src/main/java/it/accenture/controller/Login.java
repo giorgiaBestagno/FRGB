@@ -16,13 +16,14 @@ public class Login extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
-		System.out.println(username);
+		String username= req.getParameter("username");
+		String password= req.getParameter("password");
+		System.out.println(username + "-" + password);
 		UtenteDaoImpl utenteService = new UtenteDaoImpl();
-		Utente utente = utenteService.getUtenteByUsername(username);
+		Utente utente = utenteService.getByUsernameAndPassword(username, password);
 		utenteService.close();
 		System.out.println(utente);
-		if (utente == null) {
+		if (utente == null ) {
 			System.out.println("credenziali sbagliate");
 			req.setAttribute("errore", 1);
 			RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");

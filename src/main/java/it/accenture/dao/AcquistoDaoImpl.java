@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,26 +20,27 @@ public class AcquistoDaoImpl implements AcquistoDao{
 	private Statement statement;
 	private PreparedStatement prepared;
 	
-	public void AcquistoDaoImpl(){
+	public AcquistoDaoImpl(){
 		connection = DBUtilityConnection.getConnection();
+		if (connection == null){
+			System.out.println("connection è null");
+		}
 	}
 	
-	
-	public Acquisto insertAcquisto (int idProdotto){
-		Prodotto prodotto = new Prodotto();
-				
-		Acquisto acquisto = new Acquisto();
-		String query = "insert into acquisto values (acquisto_sequence.nextval, ?,?,?,?)";
+public void insertAcquisto (Acquisto acquisto){
+		
+		String query = "insert into acquisto values (acquisto_sequence.nextval,?, ?,?,?,?, ?, ?)";
 			try {
 		prepared = connection.prepareStatement(query);
-		prepared.setString(1,acquisto.getSpedizione().toString());
-		Date dataInizio = Date.valueOf(acquisto.getDataInizio());
-		prepared.setDate(2, dataInizio);
+		prepared.setString(3,acquisto.getSpedizione().toString());
+		Date dataInizio = Date.valueOf(LocalDate.now());
+		prepared.setDate(4, dataInizio);
 		Date dataFine = Date.valueOf(acquisto.getDataFine());
-		prepared.setDate(3, dataFine);
-		prepared.setInt(4, acquisto.getQuantitaAcquistata());
-		prepared.setInt(5, acquisto.getIdUtente());
-		prepared.setInt(6, prodotto.getIdProdotto());
+		prepared.setDate(5, dataFine);
+		prepared.setDouble(6, acquisto.getSpedizione().getCosto());
+		prepared.setInt(7, acquisto.getQuantitaAcquistata());
+		prepared.setInt(1, acquisto.getIdUtente());
+		prepared.setInt(2, acquisto.getIdProdotto());
 		prepared.executeUpdate();
 		
 		
@@ -53,24 +55,23 @@ public class AcquistoDaoImpl implements AcquistoDao{
 			}
 		}
 	}
-			return acquisto;
+			
 		
 	}
 	
-	
-	
 
 
-	public List<Acquisto> getAll() {
-		String query = "select * from acquisto";
+	public List<Acquisto> getAll(int idUtente) {
+		String query = "select * from acquisto where id_utente= " + idUtente;
 		List<Acquisto> listaAcquisti = new ArrayList<>();
 		ResultSet rs = null;
 		
 		try {
-			prepared = connection.prepareStatement(query);
-			rs = prepared.executeQuery();
+		
+			statement = connection.createStatement();
+			rs= statement.executeQuery(query);			
 			while (rs.next()){
-				Acquisto acquisto = new Acquisto();
+				Acquisto acquisto = new Acquisto(null, null, null, idUtente, idUtente, idUtente);
 				acquisto.setIdAcquisto(rs.getInt(1));
 				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(2)));
 				acquisto.setDataInizio(rs.getDate(3).toLocalDate());
@@ -83,9 +84,9 @@ public class AcquistoDaoImpl implements AcquistoDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-			if (prepared != null){
+			if (statement != null){
 				try {
-					prepared.close();
+					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -100,8 +101,8 @@ public class AcquistoDaoImpl implements AcquistoDao{
 		
 	}
 
-	public List<Acquisto> getElementByDataFine() {
-		String query = "select * from acquisto where data_fine = null";		
+	public List<Acquisto> getElementByDataFine(int idUtente) {
+		String query = "select * from acquisto where data_fine = null and id_utente= " + idUtente;		
 		List<Acquisto> listaOrdini = new ArrayList<>();
 		ResultSet rs = null;
 		
@@ -109,7 +110,7 @@ public class AcquistoDaoImpl implements AcquistoDao{
 			statement = connection.createStatement();
 			rs= statement.executeQuery(query);			
 			while (rs.next()){
-				Acquisto acquisto = new Acquisto();
+				Acquisto acquisto = new Acquisto(null, null, null, idUtente, idUtente, idUtente);
 				acquisto.setIdAcquisto(rs.getInt(1));
 				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(2)));
 				acquisto.setDataInizio(rs.getDate(3).toLocalDate());
@@ -122,9 +123,9 @@ public class AcquistoDaoImpl implements AcquistoDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-			if (prepared != null){
+			if (statement != null){
 				try {
-					prepared.close();
+					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
