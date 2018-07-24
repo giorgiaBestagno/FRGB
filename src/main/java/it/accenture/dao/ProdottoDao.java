@@ -15,5 +15,6 @@ public interface ProdottoDao {
 	public Prodotto getProdottoById(int idProdotto);
 	public void updateQuantita(int idProdotto, int quantita);
 	public Prodotto dettaglioProdotto(int idProdotto);
+	public List<Prodotto> getByCount();
 	public void close();
 }

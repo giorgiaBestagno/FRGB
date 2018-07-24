@@ -13,6 +13,15 @@ public class Recensione {
 	
 	
 	
+	
+	public Recensione(String titolo, String contenuto, int idUtente, int idProdotto) {
+		super();
+		this.titolo = titolo;
+		this.contenuto = contenuto;
+		this.idUtente = idUtente;
+		this.idProdotto = idProdotto;
+	}
+	
 	public int getIdRecensione() {
 		return idRecensione;
 	}
@@ -43,11 +52,15 @@ public class Recensione {
 	public void setIdProdotto(int idProdotto) {
 		this.idProdotto = idProdotto;
 	}
+
 	@Override
 	public String toString() {
 		return "Recensione [idRecensione=" + idRecensione + ", titolo=" + titolo + ", contenuto=" + contenuto
 				+ ", idUtente=" + idUtente + ", idProdotto=" + idProdotto + "]";
 	}
+	
+	
+	
 
 	
 

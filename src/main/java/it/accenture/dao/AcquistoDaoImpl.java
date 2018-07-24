@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.accenture.model.Acquisto;
+import it.accenture.model.Categoria;
 import it.accenture.model.Prodotto;
 import it.accenture.model.Spedizione;
 import it.accenture.utilities.DBUtilityConnection;
@@ -61,32 +62,36 @@ public void insertAcquisto (Acquisto acquisto){
 	
 
 
-	public List<Acquisto> getAll(int idUtente) {
-		String query = "select * from acquisto where id_utente= " + idUtente;
+	public List<Acquisto> getAllAcquisti(int idUtente) {
+		String query = "select * from acquisto where id_utente = ? and data_fine <= sysdate";
 		List<Acquisto> listaAcquisti = new ArrayList<>();
 		ResultSet rs = null;
 		
 		try {
-		
-			statement = connection.createStatement();
-			rs= statement.executeQuery(query);			
+			prepared = connection.prepareStatement(query);
+			prepared.setInt(1, idUtente);
+			
+			rs= prepared.executeQuery();			
 			while (rs.next()){
-				Acquisto acquisto = new Acquisto(null, null, null, idUtente, idUtente, idUtente);
+
+				Acquisto acquisto = new Acquisto();
 				acquisto.setIdAcquisto(rs.getInt(1));
-				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(2)));
-				acquisto.setDataInizio(rs.getDate(3).toLocalDate());
-				acquisto.setDataFine(rs.getDate(4).toLocalDate());
-				acquisto.setQuantitaAcquistata(rs.getInt(5));
-				acquisto.setIdProdotto(rs.getInt(6));
-				acquisto.setIdProdotto(rs.getInt(7));
+				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(4)));
+				acquisto.setDataInizio(rs.getDate(5).toLocalDate());
+				acquisto.setDataFine(rs.getDate(6).toLocalDate());
+				acquisto.setQuantitaAcquistata(rs.getInt(8));
+				acquisto.setIdProdotto(rs.getInt(3));
+				
+				
 				listaAcquisti.add(acquisto);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-			if (statement != null){
+			if (prepared != null){
 				try {
-					statement.close();
+					prepared.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -100,32 +105,39 @@ public void insertAcquisto (Acquisto acquisto){
 	
 		
 	}
+	
 
-	public List<Acquisto> getElementByDataFine(int idUtente) {
-		String query = "select * from acquisto where data_fine = null and id_utente= " + idUtente;		
+	public List<Acquisto> getAllOrdini(int idUtente) {
+		String query = "select * from acquisto where id_utente = ? and data_fine > sysdate";
 		List<Acquisto> listaOrdini = new ArrayList<>();
 		ResultSet rs = null;
 		
 		try {
-			statement = connection.createStatement();
-			rs= statement.executeQuery(query);			
-			while (rs.next()){
-				Acquisto acquisto = new Acquisto(null, null, null, idUtente, idUtente, idUtente);
-				acquisto.setIdAcquisto(rs.getInt(1));
-				acquisto.setSpedizione(Spedizione.valueOf(rs.getString(2)));
-				acquisto.setDataInizio(rs.getDate(3).toLocalDate());
-				acquisto.setDataFine(rs.getDate(4).toLocalDate());
-				acquisto.setQuantitaAcquistata(rs.getInt(5));
-				acquisto.setIdProdotto(rs.getInt(6));
-				acquisto.setIdProdotto(rs.getInt(7));
-				listaOrdini.add(acquisto);
-			}
+			
+				prepared = connection.prepareStatement(query);
+				prepared.setInt(1, idUtente);
+				
+				rs= prepared.executeQuery();			
+				while (rs.next()){
+
+					Acquisto acquisto = new Acquisto();
+					acquisto.setIdAcquisto(rs.getInt(1));
+					acquisto.setSpedizione(Spedizione.valueOf(rs.getString(4)));
+					acquisto.setDataInizio(rs.getDate(5).toLocalDate());
+					acquisto.setDataFine(rs.getDate(6).toLocalDate());
+					acquisto.setQuantitaAcquistata(rs.getInt(8));
+					acquisto.setIdProdotto(rs.getInt(3));
+					System.out.println(acquisto);
+					
+					listaOrdini.add(acquisto);
+					
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-			if (statement != null){
+			if (prepared != null){
 				try {
-					statement.close();
+					prepared.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -133,8 +145,14 @@ public void insertAcquisto (Acquisto acquisto){
 		}
 		
 		
+		
 		return listaOrdini;
+		
+	
+		
 	}
+
+
 
 	public void close() {
 		if(connection != null){
@@ -147,12 +165,11 @@ public void insertAcquisto (Acquisto acquisto){
 		
 	}
 
-
-
+	
 	
 
 	
 
-	
+	}
 
-}
+

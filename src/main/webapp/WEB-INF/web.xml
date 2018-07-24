@@ -97,7 +97,7 @@
 		<url-pattern>/listaProdottiDisponibili</url-pattern>
 		</servlet-mapping>
 		
-			<!-- LISTA PRODOTTI DISPONIBILI-->
+			<!-- LISTA PRODOTTI NOMI SIMILI-->
 		<servlet>
 		<servlet-name>ListaProdottiNomiSimili</servlet-name>
 		<servlet-class>it.accenture.controller.ProdottiNomiSimili</servlet-class>
@@ -106,6 +106,8 @@
 		<servlet-name>ListaProdottiNomiSimili</servlet-name>
 		<url-pattern>/listaProdottiNomiSimili</url-pattern>
 		</servlet-mapping>
+		
+		
 		<!-- CATEGORIA -->
 			<servlet>
 		<servlet-name>Categoria</servlet-name>
@@ -114,6 +116,16 @@
 		<servlet-mapping>
 		<servlet-name>Categoria</servlet-name>
 		<url-pattern>/categoria</url-pattern>
+		</servlet-mapping>
+		
+		<!-- CARRELLO-->
+		<servlet>
+		<servlet-name>Carrello</servlet-name>
+		<servlet-class>it.accenture.controller.Carrello</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>Carrello</servlet-name>
+		<url-pattern>/carrello</url-pattern>
 		</servlet-mapping>
 		
 		<!-- ACQUISTA -->
@@ -138,12 +150,12 @@
 		
 		<!-- DETTAGLI-->
 			<servlet>
-		<servlet-name>Dettagli</servlet-name>
-		<servlet-class>it.accenture.controller.Dettagli</servlet-class>
+		<servlet-name>DettagliProdotto</servlet-name>
+		<servlet-class>it.accenture.controller.DettagliProdotto</servlet-class>
 		</servlet>
 		<servlet-mapping>
-		<servlet-name>Dettagli</servlet-name>
-		<url-pattern>/dettagli</url-pattern>
+		<servlet-name>DettagliProdotto</servlet-name>
+		<url-pattern>/dettagliProdotto</url-pattern>
 		</servlet-mapping>
 		
 		
@@ -155,6 +167,17 @@
 		<servlet-mapping>
 		<servlet-name>ListaOrdini</servlet-name>
 		<url-pattern>/listaOrdini</url-pattern>
+		</servlet-mapping>
+		
+			
+		<!-- RECENSIONI -->
+			<servlet>
+		<servlet-name>Recensioni</servlet-name>
+		<servlet-class>it.accenture.controller.Recensioni</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>Recensioni</servlet-name>
+		<url-pattern>/recensioni</url-pattern>
 		</servlet-mapping>
 		
 			
@@ -188,6 +211,20 @@
 		<url-pattern>/tracking</url-pattern>
 		</servlet-mapping>
 		
+		<!-- PIU VENDUTI -->
+			<servlet>
+		<servlet-name>PiuVenduti</servlet-name>
+		<servlet-class>it.accenture.controller.PiuVenduti</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>PiuVenduti</servlet-name>
+		<url-pattern>/piuVenduti</url-pattern>
+		</servlet-mapping>
+		
+		
+		<welcome-file-list>
+		<welcome-file>piuVenduti</welcome-file>
+		</welcome-file-list>
 		
 		
 		

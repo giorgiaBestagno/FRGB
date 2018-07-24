@@ -23,8 +23,13 @@
 <nav class="nav navbar-inverse">
 <div class="navbar-header">
 <a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
-<input type="text" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
 <li><a href="contatti" style="color: white">Contatti</a></li>
 </div>
 <div class="collapse navbar-collapse">
@@ -66,8 +71,14 @@ value="<%=username%>"
 <%if (password!= null){ %>
 value="<%=password%>"
 <%}%>
+
 >
+ <input type="checkbox" id="myPassword" onclick="mostraPassword()">Mostra Password
+<span class="glyphicon glyphicon-eye-open"></span>
+      
 </div>
+
+
 <span class="col-md-3"></span>
 </div>
 

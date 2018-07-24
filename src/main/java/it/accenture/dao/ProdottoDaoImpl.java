@@ -231,7 +231,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 
 	public Prodotto dettaglioProdotto(int idProdotto) {
 		Prodotto prodotto = new Prodotto();
-		String query ="select * from prodotto p inner join recensione r on p.id = r.id_prodotto where p.id=? ";
+		String query ="select * from prodotto where id=? ";
 		ResultSet resultSet= null;
 		try {
 			prepared= connection.prepareStatement(query);
@@ -270,10 +270,79 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	}
 	
 	@Override
-	public void updateQuantita(int idProdotto, int quantita) {
+	public void updateQuantita(int idProdotto, int quantitaDisponibile) {
 		
+		String query ="update prodotto set quantita_disponibile = ? where id=?";
+		try {
+			prepared= connection.prepareStatement(query);
+			prepared.setInt(1, quantitaDisponibile);
+			prepared.setInt(2, idProdotto);
+			prepared.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+		if (prepared != null){
+			try {
+				prepared.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		}
 	}
 
+	@Override
+	public List<Prodotto> getByCount() {
+		ResultSet rs = null;
+		List<Prodotto> listaPiuVenduti = new ArrayList<>();
+		String query = " select * from prodotto where id in (select "
+				+ "id_prodotto from acquisto group by id_prodotto order by "
+				+ "count(quantita_acquistata) desc fetch first 3 rows only)";
+		
+		try {
+			statement = connection.createStatement();
+			rs = statement.executeQuery(query);
+			while(rs.next()){
+				Prodotto prodotto = new Prodotto();
+				
+				prodotto.setIdProdotto(rs.getInt(1));
+				prodotto.setNome(rs.getString(2));
+				prodotto.setCategoria(Categoria.valueOf(rs.getString(3)));
+				prodotto.setMarca(rs.getString(4));
+				prodotto.setPrezzo(rs.getDouble(5));
+				prodotto.setOfferta(rs.getBoolean(6));
+				prodotto.setSconto(rs.getInt(7));
+				prodotto.setQuantitaDisponibile(rs.getInt(8));
+				prodotto.setImmagine(rs.getString(9));
+				listaPiuVenduti.add(prodotto);
+				
+			}
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try{
+			
+		if(rs != null){
+			rs.close();
+		}
+		if(statement != null){
+			statement.close();
+		}
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		}
+		return listaPiuVenduti;
+	}
+	
+
+
+	
+	
 
 
 	public void close() {

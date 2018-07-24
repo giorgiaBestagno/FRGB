@@ -1,3 +1,4 @@
+<%@page import="it.accenture.model.Prodotto"%>
 <%@page import="it.accenture.model.Utente"%>
 <%@page import="it.accenture.model.Acquisto"%>
 <%@page import="java.util.List" %>
@@ -10,10 +11,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>I miei Acquisti</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/stile.css">
+<script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 <% Utente utenteLoggato = (Utente)session.getAttribute("utenteLoggato"); %>
 <% List<Acquisto> listaAcquisti = (List<Acquisto>) request.getAttribute("listaAcquisti"); %>
+
+
+
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
 <a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
@@ -21,9 +29,14 @@
 
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
-<li><a href=" contatti" style="color: white">Contatti</a></li>
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
+<li><a href="contatti.jsp" style="color: white">Contatti</a></li>
 <%if (utenteLoggato == null){ %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
 <li><a href="login.jsp" style="color: white;" >Login</a></li>
@@ -36,10 +49,10 @@
 <form action="categoria" method="get">
 
 <label style="color:white;">Categorie</label>
-<select name="scelta" onchange="location.href = categoria.jsp">
+<select name="scelta">
 <option value="#" selected="selected">------</option>
-<option value="ABBIGLIAMENTO">Abbigliamento</option> 
-<option value="ARTE">Arte</option> 
+<option value="ABBIGLIAMENTO" >Abbigliamento</option> 
+<option value="ARTE" >Arte</option> 
 <option value="CASA">Casa</option> 
 <option value="CUCINA">Cucina</option> 
 <option value="ELETTRONICA">Elettronica</option> 
@@ -48,17 +61,15 @@
 <option value="GIOCATTOLI">Giocattoli</option> 
 <option value="LIBRI">Libri</option> 
 <option value="SPORT">Sport</option> 
-
 </select>
 <input type= "submit" value="Vai">
 </form>
 
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
-<li><a href ="logout" style="color: white">Logout</a></li>
+<li><a href ="logout " style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
-<li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
 
 <%} %>
@@ -76,22 +87,58 @@
 <div class="page-header">
 <h1>I miei Acquisti</h1>
 </div>
+<%if(listaAcquisti.isEmpty()){ %>
+<p>Lista Ordini vuota</p>
+<%}else{ %>
 <div class="list-group">
 <%for(Acquisto acquisto : listaAcquisti){%>
 <div class="list-group-item">
-<p>Id acquisto : <%= acquisto.getIdAcquisto() %></p>
-<p>Spedizione : <%= acquisto.getSpedizione().toString() %></p>
-<p>Data inizio : <%= acquisto.getDataFine() %></p>
-<p>Data fine : <%= acquisto.getDataFine() %></p>
-<p>Quantità acquistata : <%= acquisto.getQuantitaAcquistata() %></p>
+<p> Id prodotto : <%=acquisto.getIdProdotto() %>
+<p>Id acquisto : <%=acquisto.getIdAcquisto() %></p>
+<p>Spedizione : <%=acquisto.getSpedizione().toString() %></p>
+<p>Data inizio : <%=acquisto.getDataInizio() %></p>
+<p>Data Consegna : <%=acquisto.getDataFine() %></p>
+<p>Quantità acquistata : <%=acquisto.getQuantitaAcquistata() %></p>
 </div>
+
+
+<form action="acquista" method="get">
+<input type="hidden" name="idProdotto" value="<%=acquisto.getIdProdotto()%>">
+<input type="submit" value="Acquista di nuovo" <% if(utenteLoggato != null) {%>
+class="btn btn-success"
+<% }else{%>
+class="btn btn-warning"
+disabled
+
+<%} %>> 
+
+</form>
+<!--  da finire -->
+<form action="recensioni" method="get">
+<input type="hidden" name="idProdotto" value="<%=acquisto.getIdProdotto()%>">
+
+<h4> Inserisci Nuova Recensione</h4>
+
+<label for="titolo" >Titolo</label>
+<input type="text" id="titolo" name="titolo">
+
+<label for="testo" >Testo Recensione</label>
+<textarea rows="4" cols="20" name="testo" maxlength="240"></textarea>
+
+
+<input type="submit" value="Aggiungi recensione" > 
+</form>
+
 <%} %>
+
+
+<%} %>
+
 </div>
 
 
 
 
-
-
+</div>
 </body>
 </html>

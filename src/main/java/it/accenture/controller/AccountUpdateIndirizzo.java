@@ -28,6 +28,8 @@ System.out.println(username);
 UtenteDaoImpl utenteService = new UtenteDaoImpl();
 String indirizzo = req.getParameter("indirizzo");
 utenteService.updateIndirizzo(indirizzo, idUtente);
+((Utente) sessione.getAttribute("utenteLoggato")).setIndirizzo(indirizzo);
+
 utenteService.close();
 
 

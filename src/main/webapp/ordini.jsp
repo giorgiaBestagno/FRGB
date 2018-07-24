@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="it.accenture.model.Utente"%>
 <%@page import="it.accenture.model.Acquisto"%>
 <%@page import="java.util.List" %>
@@ -26,8 +27,13 @@
 
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
 <li><a href=" contatti.jsp" style="color: white">Contatti</a></li>
 <%if (utenteLoggato == null){ %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
@@ -60,7 +66,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout" style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
@@ -77,16 +83,33 @@
 <div class="page-header">
 <h1>I miei Ordini</h1>
 </div>
+<%if(listaOrdini.isEmpty()){ %>
+<p>Lista Ordini vuota</p>
+<%}else{ %>
+
 <div class="list-group">
 <%for(Acquisto acquisto : listaOrdini){%>
+
+
 <div class="list-group-item">
 <p>Id acquisto : <%= acquisto.getIdAcquisto() %></p>
 <p>Spedizione : <%= acquisto.getSpedizione().toString() %></p>
 <p>Data inizio : <%= acquisto.getDataInizio() %></p>
 <p>Quantità acquistata : <%= acquisto.getQuantitaAcquistata() %></p>
 </div>
+
+
+<div class="progress"  id="progress" style="width:500px">
+  <div id="myBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+
+
+<%} %>
 <%} %>
 </div>
+
+
 
 </body>
 </html>

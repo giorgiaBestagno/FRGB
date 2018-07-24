@@ -9,6 +9,7 @@ public class Acquisto {
 	private LocalDate dataInizio;
 	private LocalDate dataFine;
 	private int quantitaAcquistata;
+	private double costoSpedizione;
 	private int idUtente;
 	private int idProdotto;
 	
@@ -26,7 +27,35 @@ public class Acquisto {
 		this.quantitaAcquistata = quantitaAcquistata;
 		this.idUtente = idUtente;
 		this.idProdotto = idProdotto;
+		
 	}
+	
+	
+
+	
+	
+	
+	
+
+
+
+
+
+	public Acquisto() {
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 	public int getIdAcquisto() {
 		return idAcquisto;
 	}

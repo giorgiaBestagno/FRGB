@@ -23,8 +23,13 @@
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
 <li><a href=" contatti" style="color: white">Contatti</a></li>
 
 <% if (utenteLoggato == null) { %>

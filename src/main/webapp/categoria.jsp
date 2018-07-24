@@ -49,8 +49,24 @@ Sconto : <%=prodotto.getSconto() %><br>
 Quantità disponibile : <%=prodotto.getQuantitaDisponibile() %><br>
 <img src= "<%=prodotto.getImmagine() %>"><br>
 
-<input type="button" value="Acquista" onclick="acquista.jsp">
-<input type="button" value="Aggiungi al carrello" onclick="carrello.jsp">
+<form action="acquista" method="get">
+<input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="submit" value="Acquista" <% if(utenteLoggato != null) {%>
+class="btn btn-success"
+<% }else{%>
+class="btn btn-warning"
+disabled
+<%} %>
+>
+</form>
+<form action="carrello" method="post">
+<input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="submit" value="Aggiungi al carrello" >
+</form>
+<form action="dettagliProdotto" method="get">
+<input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="submit" " value="Dettagli Prodotto" >
+</form>
 
 </p>
 

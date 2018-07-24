@@ -28,7 +28,10 @@ public class AccountUpdatePassword extends HttpServlet {
 	UtenteDaoImpl utenteService = new UtenteDaoImpl();
 	String password = req.getParameter("password");
 	utenteService.updatePassword(password, idUtente);
+	((Utente) sessione.getAttribute("utenteLoggato")).setPassword(password);
+
 	utenteService.close();
+	
 	
 
 

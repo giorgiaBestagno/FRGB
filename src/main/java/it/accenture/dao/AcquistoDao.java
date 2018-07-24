@@ -13,9 +13,9 @@ public interface AcquistoDao {
 	
 	public void insertAcquisto (Acquisto acquisto);
 	
-	public List<Acquisto> getAll(int idUtente);
-	
-	public List<Acquisto> getElementByDataFine(int idUtente);
+	public List<Acquisto> getAllAcquisti(int idUtente);
+		
+	public List<Acquisto> getAllOrdini(int idUtente);
 	
 	public void close();	
 }

@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,7 +16,7 @@
 </head>
 <body>
 <% Utente utenteLoggato = (Utente) session.getAttribute ("utenteLoggato"); %>
-<% List<Prodotto> listaProdotti = (List<Prodotto>) request.getAttribute("listaProdotti"); %>
+<% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
 <a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
@@ -78,7 +78,7 @@
 
 <!-- Dettagli Prodotto -->
 <div class="list-group">
-<%for(Prodotto prodotto : listaProdotti){%>
+
 <div class="list-group-item">
 <p>Id prodotto : <%= prodotto.getIdProdotto() %></p>
 <p>Nome : <%= prodotto.getNome() %></p>
@@ -88,11 +88,18 @@
 <p>Offerta : <%= prodotto.isOfferta() %></p>
 <p>Sconto : <%= prodotto.getSconto() %> &#37</p>
 <p>Quantità disponibile : <%= prodotto.getQuantitaDisponibile()%> </p>
-<img src= "<%=prodotto.getImmagine() %>">
+
+
+<div class="zoomin">
+
+  <img  src= "<%=prodotto.getImmagine() %>"  >
+ </div>
+ 
+
 
 </div>
 
-<%} %>
+
 </div>
 
 

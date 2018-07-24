@@ -30,10 +30,9 @@
 
 <% } else {  %>
 
-<form action="categoria" method="get">
 
 <li><a href ="logout" style="color: white">Logout</a></li>
-<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
 
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
@@ -76,6 +75,10 @@
 <input type="submit" value="Cambia Indirizzo" >
 <br>
 </form>
+
+
+
+
 
 
 </div>

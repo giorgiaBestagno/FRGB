@@ -1,6 +1,7 @@
 package it.accenture.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +22,19 @@ public class ListaOrdini extends HttpServlet{
 		List<Acquisto> listaOrdini = new ArrayList<>();
 		AcquistoDaoImpl acquistoService = new AcquistoDaoImpl();
 		HttpSession sessione = req.getSession();
-		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-		int idUtente = utente.getIdUtente();
-		listaOrdini = acquistoService.getElementByDataFine(idUtente);
-		for(Acquisto acquisto: listaOrdini){
-			System.out.println(acquisto);
-		}
+		 Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+		 int idUtente = utente.getIdUtente();
+		listaOrdini = acquistoService.getAllOrdini(idUtente);
 		acquistoService.close();
+
+			
+		
 		req.setAttribute("listaOrdini", listaOrdini);
+		
+	
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("ordini.jsp");
 		dispatcher.forward(req, resp);
-		}
-
-
+		
+	}
 }

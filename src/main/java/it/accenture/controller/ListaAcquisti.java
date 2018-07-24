@@ -1,6 +1,7 @@
 package it.accenture.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,18 +20,20 @@ public class ListaAcquisti extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	List<Acquisto> listaAcquisti = new ArrayList<>();
+	
+	
 	AcquistoDaoImpl acquistoService = new AcquistoDaoImpl();
 	HttpSession sessione = req.getSession();
-	Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-	int idUtente = utente.getIdUtente();
-	listaAcquisti = acquistoService.getAll(idUtente);
-	for(Acquisto acquisto: listaAcquisti){
-		System.out.println(acquisto);
-	}
+	 Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+	 	int idUtente = utente.getIdUtente();
+	System.out.println(idUtente);
+	listaAcquisti = acquistoService.getAllAcquisti(idUtente);
+	System.out.println(listaAcquisti);
 	acquistoService.close();
-	req.setAttribute("listaAcquisti", listaAcquisti);
+	req.setAttribute("listaAcquisti", listaAcquisti);		
 	RequestDispatcher dispatcher = req.getRequestDispatcher("acquisti.jsp");
 	dispatcher.forward(req, resp);
+	
 	}
 
 }

@@ -117,6 +117,8 @@ public class UtenteDaoImpl implements UtenteDao {
 			utente.setCognome(resultSet.getString(3));
 			utente.setUsername(resultSet.getString(4));
 			utente.setPassword(resultSet.getString(5));
+			utente.setIndirizzo(resultSet.getString(6));
+
 		}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -179,9 +181,11 @@ public class UtenteDaoImpl implements UtenteDao {
 					utente = new Utente();
 					utente.setIdUtente(resultSet.getInt(1));
 					utente.setNome(resultSet.getString(2));
+					utente.setCognome(resultSet.getString(3));
 					utente.setUsername(username);
 					utente.setPassword(password); 
-					
+					utente.setIndirizzo(resultSet.getString(6));
+
 				}
 				
 			} catch (SQLException e) {

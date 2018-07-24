@@ -36,13 +36,17 @@ public class Acquista extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		AcquistoDaoImpl acquistoService = new AcquistoDaoImpl();
+		ProdottoDaoImpl prodottoService = new ProdottoDaoImpl();
 		HttpSession sessione = req.getSession();
 		Prodotto prodotto = (Prodotto) sessione.getAttribute("prodotto");
 		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 		int idUtente = utente.getIdUtente();
 		LocalDate dataInizio = LocalDate.now();
 		int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));
-		int quantita =  Integer.parseInt(req.getParameter("quantita"));
+		int quantitaRichiesta =  Integer.parseInt(req.getParameter("quantita"));
+		int quantitaDisponibile = Integer.parseInt(req.getParameter("quantitaDisponibile"));
+		quantitaDisponibile -= quantitaRichiesta;
+		
 		String spedizioneString = req.getParameter("spedizione");
 		Spedizione spedizione = Spedizione.valueOf(spedizioneString);
 		LocalDate dataFine = null;
@@ -55,10 +59,13 @@ public class Acquista extends HttpServlet {
 			}
 		
 		String pagamento = req.getParameter("pagamento");
-		Acquisto acquisto = new Acquisto(spedizione, dataInizio, dataFine, quantita, idUtente, idProdotto);
+		Acquisto acquisto = new Acquisto(spedizione, dataInizio, dataFine, quantitaRichiesta, idUtente, idProdotto);
 		acquistoService.insertAcquisto(acquisto);
+		acquistoService.close();
 		System.out.println(acquisto);
 		req.setAttribute("acquisto", acquisto);
+		prodottoService.updateQuantita(idProdotto, quantitaDisponibile);
+		prodottoService.close();
 		RequestDispatcher dispatcher = req.getRequestDispatcher("successo.jsp");
 		dispatcher.forward(req, resp);
 		

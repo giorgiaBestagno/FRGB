@@ -19,7 +19,6 @@
 </head>
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
 <%Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
-
 <%Spedizione spedizione = (Spedizione) session.getAttribute("spedizione"); %>
 
 <body>
@@ -30,8 +29,13 @@
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
- <input type="text" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
 <li><a href=" contatti.jsp" style="color: white">Contatti</a></li>
 <% if (utenteLoggato == null) { %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
@@ -56,14 +60,17 @@
 
 </div>
 
-<form action="acquista" method="post" class= "form-group">
+<form action="acquista" method="post" class= "form-group" >
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="hidden" name="quantitaDisponibile" value="<%=prodotto.getQuantitaDisponibile()%>">
 
 
 
 <div class= "form-group">
 <label for="quantita">Inserisci Quantità Da Acquistare</label>
 <input type="text" id="quantita" name="quantita">
+
+
 </div>
 
 <div class= "form-group">
@@ -86,7 +93,15 @@
 
 
 
-<input type="submit" value="Conferma" class="btn btn-primary">
+<input type="submit" value="Conferma" class="btn btn-primary" onsubmit="return controlloDisponibilita()">
 </form>
+
+<!-- alert -->
+<div class="alert alert-danger" id="alert" style="display:none"> 
+<p class="text-center">La quantità dispondibile è minore della quantità desiderata</p>
+</div>
+
+
+
 </body>
 </html>

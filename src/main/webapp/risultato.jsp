@@ -96,13 +96,8 @@ Id Prodotto : <%=prodottoDisponibile.getIdProdotto() %>
 <br>
 Nome Prodotto : <%=prodottoDisponibile.getNome() %>
 <br>
-Categoria Prodotto : <%=prodottoDisponibile.getCategoria() %><br>
-Marca Prodotto : <%=prodottoDisponibile.getMarca() %><br>
-Prezzo Prodotto : <%=prodottoDisponibile.getPrezzo() %><br>
-Offerta : <%=prodottoDisponibile.isOfferta()%><br>
-Sconto : <%=prodottoDisponibile.getSconto() %><br>
-Quantità disponibile : <%=prodottoDisponibile.getQuantitaDisponibile() %><br>
-<img src="<%=prodottoDisponibile.getImmagine() %>"><br>
+
+<img src="<%=prodottoDisponibile.getImmagine() %>" >
 <form action="acquista" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodottoDisponibile.getIdProdotto()%>">
 <input type="submit" value="Acquista" <% if(utenteLoggato != null) {%>
@@ -112,9 +107,17 @@ class="btn btn-warning"
 disabled
 <%} %>
 >
-<%} %>
 </form>
-<input type="button" value="Aggiungi al carrello" onclick="carrello.jsp">
+<form action="carrello" method="post">
+<input type="hidden" name="idProdotto" value="<%=prodottoDisponibile.getIdProdotto()%>">
+<input type="submit" value="Aggiungi al carrello" >
+</form>
+<form action="dettagliProdotto" method="get">
+<input type="hidden" name="idProdotto" value="<%=prodottoDisponibile.getIdProdotto()%>">
+<input type="submit" " value="Dettagli Prodotto" >
+</form>
+<%} %>
+
 
 </p>
 

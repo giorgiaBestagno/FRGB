@@ -25,8 +25,14 @@
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+
+</form>
 <li><a href=" contatti.jsp" style="color: white">Contatti</a></li>
 <% if (utenteLoggato == null) { %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
@@ -56,7 +62,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout" style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
@@ -98,8 +104,24 @@ Sconto : <%=prodotto.getSconto() %><br>
 Quantità disponibile : <%=prodotto.getQuantitaDisponibile() %><br>
 <img src="<%=prodotto.getImmagine() %>"><br>
 
-<input type="button" value="Acquista" onclick="acquista.jsp">
-<input type="button" value="Aggiungi al carrello" onclick="carrello.jsp">
+<form action="acquista" method="get">
+<input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="submit" value="Acquista" <% if(utenteLoggato != null) {%>
+class="btn btn-success"
+<% }else{%>
+class="btn btn-warning"
+disabled
+<%} %>
+>
+</form>
+<form action="carrello" method="post">
+<input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="submit" value="Aggiungi al carrello" >
+</form>
+<form action="dettagliProdotto" method="get">
+<input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
+<input type="submit" " value="Dettagli Prodotto" >
+</form>
 
 </p>
 

@@ -18,8 +18,13 @@
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
-<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
 <li><a href=" contatti" style="color: white">Contatti</a></li>
 <% if (utenteLoggato == null) { %>
 <li><a href="registrazione.jsp">Registrazione</a></li>
@@ -48,7 +53,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout" style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
@@ -65,6 +70,7 @@
 <h3>Quantita Acquistata : <%=acquisto.getQuantitaAcquistata() %></h3>
 <h3>Data Inizio : <%=acquisto.getDataInizio() %> 
 <h3>Data Fine : <%= acquisto.getDataFine() %></h3>
+
 </div>
 
 
