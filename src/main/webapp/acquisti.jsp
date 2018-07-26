@@ -131,7 +131,7 @@ disabled
 <textarea rows="4" cols="20" id="contenuto" name="contenuto" maxlength="240"></textarea>
 </div>
 <div class="form-group">
-<input type="submit" name="recensione" value="Aggiungi recensione">
+<input type="submit" id="recensione" value="Aggiungi recensione" >
 
 
 

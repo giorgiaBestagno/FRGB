@@ -25,6 +25,32 @@ public class Recensione {
 		this.idProdotto = idProdotto;
 	}
 	
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Recensione other = (Recensione) obj;
+	
+		if (idProdotto != other.idProdotto)
+			return false;
+	
+		if (idUtente != other.idUtente)
+			return false;
+		
+		return true;
+	}
+	
+	
+	
+	
+	
+
 	public int getIdRecensione() {
 		return idRecensione;
 	}

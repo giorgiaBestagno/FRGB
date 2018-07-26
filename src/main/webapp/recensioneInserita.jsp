@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="it.accenture.model.Utente"%>
 <%@page import="it.accenture.model.Recensione"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,6 +16,11 @@
 <body>
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
 <%Recensione recensione = (Recensione) request.getAttribute("recensione"); %>
+<%List<Recensione> listaRecensioni = (List<Recensione> ) request.getAttribute("listaRecensioni"); %>
+
+<%if(recensione == null){ %>
+
+
 
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
@@ -71,9 +77,13 @@
 
 </nav>
 
+<h1>Impossibile inserire la recensione, perché già presente</h1>
+
+
+<%}else{ %>
 <h1>Recensione inserita/aggiornata con successo!</h1>
 <h2>Titolo: <%=recensione.getTitolo() %></h2>
 <h2>Contenuto: <%=recensione.getContenuto() %></h2>
-
+<%} %>
 </body>
 </html>

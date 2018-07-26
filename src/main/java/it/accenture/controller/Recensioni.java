@@ -23,48 +23,45 @@ public class Recensioni extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		List<Recensione> listaRecensioni = (List<Recensione>) req.getAttribute("listaRecensioni");
-		
-		Recensione recensione = new Recensione();
+	
 		HttpSession sessione = req.getSession();
-		
-		 Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+
+		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+		 int idUtente = utente.getIdUtente();
+
+		 int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));	 
+		 String titolo = req.getParameter("titolo");
+		 String contenuto = req.getParameter("contenuto");	
+			Recensione recensione = new Recensione(titolo, contenuto, idUtente, idProdotto);
 
 			 RecensioneDaoImpl recensioneService = new RecensioneDaoImpl();
- 			 
-		 int idUtente = utente.getIdUtente();
-		 System.out.println(idUtente);
+				List<Recensione> listaRecensioni = 	recensioneService.getAllRecensioni(idUtente, idProdotto);
 
-		 int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));
-         System.out.println(idProdotto);
-		 
-		 String titolo = req.getParameter("titolo");
-		 System.out.println(titolo);
 
-		 String contenuto = req.getParameter("contenuto");
-		 System.out.println(contenuto);
 		
-		 recensione = (Recensione) req.getAttribute("recensione");
-
-		 recensione = new Recensione(titolo, contenuto, idUtente, idProdotto);
-		
-			if(listaRecensioni !=null && recensioneService.getRecensioneByIdUtente(idProdotto, idUtente) != null){
-			
-				 RequestDispatcher dispatcher = req.getRequestDispatcher("aggiornaRecensione.jsp");
-					dispatcher.forward(req, resp);
-			}else{
-		recensioneService.insertRecensione(recensione);
-		
-			
-
-		recensioneService.close();
-		System.out.println(recensione);
-		req.setAttribute("recensione", recensione);
+			if(listaRecensioni == null){
+				listaRecensioni = new ArrayList<>();
+				listaRecensioni.add(recensione);
+				
+          	
+          	
+          	
+			}else if(!listaRecensioni.contains(recensione)){
+	
+				listaRecensioni.add(recensione);
+				recensioneService.insertRecensione(recensione);	
+				req.setAttribute("recensione", recensione);
 			}
+			
 		
-		 RequestDispatcher dispatcher = req.getRequestDispatcher("recensioneInserita.jsp");
-			dispatcher.forward(req, resp);
+			recensioneService.close();
+
+			req.setAttribute("listaRecensioni", listaRecensioni);
 		
+
+			 RequestDispatcher dispatcher = req.getRequestDispatcher("recensioneInserita.jsp");
+				dispatcher.forward(req, resp);
+	
 	}
 	
 	

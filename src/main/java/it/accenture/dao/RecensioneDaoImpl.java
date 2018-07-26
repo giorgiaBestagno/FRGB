@@ -70,7 +70,6 @@ public class RecensioneDaoImpl implements RecensioneDao {
 			}
 			
 		}
-		
 		@Override
 		public List<Recensione> getAllRecensioni(int idProdotto) {
 			
@@ -79,8 +78,56 @@ public class RecensioneDaoImpl implements RecensioneDao {
 			ResultSet rs = null;
 			try {
 				prepared = connection.prepareStatement(query);
-				prepared.setInt(1, idProdotto);
 				
+				prepared.setInt(1, idProdotto);
+
+				rs = prepared.executeQuery();
+				
+				while(rs.next()){
+					Recensione recensione = new Recensione();
+					
+					recensione.setIdRecensione(rs.getInt(1));
+					recensione.setTitolo(rs.getString(2));
+					recensione.setContenuto(rs.getString(3));
+					recensione.setIdUtente(rs.getInt(4));
+					recensione.setIdProdotto(rs.getInt(5));
+					listaRecensioni.add(recensione);
+					
+				}
+
+			} catch (SQLException e) {
+		
+				e.printStackTrace();
+			} finally {
+				try {
+			
+				if (prepared != null) {
+					
+						prepared.close();
+				} 
+				if (rs != null){
+					rs.close();
+				}
+						
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+			}
+			
+			
+			return listaRecensioni;
+		}
+		@Override
+		public List<Recensione> getAllRecensioni(int idUtente, int idProdotto) {
+			
+			String query = "select * from recensione where id_utente = ? and id_prodotto = ?";
+			List<Recensione> listaRecensioni = new ArrayList<>();
+			ResultSet rs = null;
+			try {
+				prepared = connection.prepareStatement(query);
+				prepared.setInt(1, idUtente);
+				prepared.setInt(2, idProdotto);
+
 				rs = prepared.executeQuery();
 				
 				while(rs.next()){
@@ -124,6 +171,7 @@ public class RecensioneDaoImpl implements RecensioneDao {
 
 			String query = "select * from recensione where id_prodotto = ? and id_utente = ?";
 			Recensione recensione = new Recensione();
+			ResultSet rs = null;
 
 			
 			try {
@@ -131,27 +179,39 @@ public class RecensioneDaoImpl implements RecensioneDao {
 				prepared.setInt(1, idProdotto);
 				prepared.setInt(2, idUtente);
 
-				prepared.executeQuery();
+				rs = prepared.executeQuery();
+			
+				
+				
+				if(rs.next()){
+					
+					recensione.setIdRecensione(rs.getInt(1));
+					recensione.setTitolo(rs.getString(2));
+					recensione.setContenuto(rs.getString(3));
+					recensione.setIdUtente(rs.getInt(4));
+					recensione.setIdProdotto(rs.getInt(5));
+					
+				}
+				
 
 			
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{
-				if(prepared != null){
+				
 					try {
+						if (rs != null) {
+							rs.close();
+						}
+						if(prepared != null){
 						prepared.close();
+						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
-			}
 			
-			
-			
-			
-			
-			
-			
+	
 			return recensione;
 		}
 		
