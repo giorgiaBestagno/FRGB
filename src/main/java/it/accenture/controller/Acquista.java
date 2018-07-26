@@ -38,7 +38,7 @@ public class Acquista extends HttpServlet {
 		AcquistoDaoImpl acquistoService = new AcquistoDaoImpl();
 		ProdottoDaoImpl prodottoService = new ProdottoDaoImpl();
 		HttpSession sessione = req.getSession();
-		Prodotto prodotto = (Prodotto) sessione.getAttribute("prodotto");
+		Prodotto prodotto = (Prodotto) req.getAttribute("prodotto");
 		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 		int idUtente = utente.getIdUtente();
 		LocalDate dataInizio = LocalDate.now();
@@ -58,7 +58,6 @@ public class Acquista extends HttpServlet {
 				 dataFine = LocalDate.now().plusDays(1);
 			}
 		
-		String pagamento = req.getParameter("pagamento");
 		Acquisto acquisto = new Acquisto(spedizione, dataInizio, dataFine, quantitaRichiesta, idUtente, idProdotto);
 		acquistoService.insertAcquisto(acquisto);
 		acquistoService.close();

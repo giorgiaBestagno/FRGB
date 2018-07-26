@@ -59,7 +59,7 @@ disabled
 <%} %>
 >
 </form>
-<form action="carrello" method="post">
+<form action="carrello" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
 <input type="submit" value="Aggiungi al carrello" >
 </form>

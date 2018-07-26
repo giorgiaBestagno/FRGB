@@ -1,29 +1,22 @@
 <%@page import="it.accenture.model.Recensione"%>
+<%@page import="it.accenture.model.Acquisto"%>
 <%@page import="it.accenture.model.Utente"%>
-<%@page import="it.accenture.model.Prodotto"%>
-<%@page import="java.util.List" %>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Dettagli Prodotto</title>
+<title>Successo</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/stile.css">
-<script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<% Utente utenteLoggato = (Utente) session.getAttribute ("utenteLoggato"); %>
-<% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
-<%List<Recensione> listaRecensioni = (List<Recensione>) request.getAttribute ("listaRecensioni"); %>
+<% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
+<% Recensione recensione = (Recensione) request.getAttribute("recensione"); %>
 <nav class="nav navbar-inverse">
-<div class="navbar-header ">
+<div class="navbar-header">
 <a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
 </div>
-
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
 <form action="listaProdottiNomiSimili" method="get">
@@ -34,19 +27,14 @@
 
 </form>
 <li><a href=" contatti" style="color: white">Contatti</a></li>
-<%if (utenteLoggato == null){ %>
-<li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
-<li><a href="login.jsp" style="color: white;" >Login</a></li>
-
-
-
-
-<% }else { %>
-
+<% if (utenteLoggato == null) { %>
+<li><a href="registrazione.jsp">Registrazione</a></li>
+<li><a href="login.jsp">Login</a></li>
+<% } else { %>
 <form action="categoria" method="get">
 
 <label style="color:white;">Categorie</label>
-<select name="scelta" >
+<select name="scelta">
 <option value="#" selected="selected">------</option>
 <option value="ABBIGLIAMENTO">Abbigliamento</option> 
 <option value="ARTE">Arte</option> 
@@ -71,50 +59,32 @@
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
 
-<%} %>
-
-
+<% } %>
 </ul>
 </div>
 
 </nav>
+
 <div class="container">
-<div class = "page-header text-center" >
-<h1>Dettagli Prodotto</h1>
+<div class="page-header">
+<h1>Hai già recensito questo prodotto!</h1>
+
+<form action="recensioneUpdate" method="get">
+<div class="form-group">
+<p>Aggiorna la recensione per questo prodotto: </p>
+
+<input type="hidden" name="idRecensione" value="<%=recensione.getIdRecensione() %>">
+<input type="hidden" name="idUtente" value="<%=recensione.getIdUtente() %>">
+<label type="text" for="contenuto">Testo Aggiornato</label>
+<textarea rows="4" cols="20" id="contenuto" name="contenuto" maxlength="240"></textarea>
 </div>
-
-<!-- Dettagli Prodotto -->
-<div class="list-group">
-
-<div class="list-group-item">
-<p>Id prodotto : <%= prodotto.getIdProdotto() %></p>
-<p>Nome : <%= prodotto.getNome() %></p>
-<p>Categoria : <%= prodotto.getCategoria().toString() %></p>
-<p>Marca : <%= prodotto.getMarca() %></p>
-<p>Prezzo : <%= prodotto.getPrezzo() %></p>
-<p>Offerta : <%= prodotto.isOfferta() %></p>
-<p>Sconto : <%= prodotto.getSconto() %> &#37</p>
-<p>Quantità disponibile : <%= prodotto.getQuantitaDisponibile()%> </p>
-<p>Recensioni : <% for (Recensione recensione : listaRecensioni) {%>
-<%=recensione.getTitolo() %>
-<%=recensione.getContenuto() %>
-
-<%} %>
-</p>
-
-<div class="zoomin">
-
-  <img  src= "<%=prodotto.getImmagine() %>"  >
- </div>
- 
-
+<input type="submit" value="Aggiorna Recensione" onsubmit="recensioneInserita.jsp">
+</form>
 
 </div>
 
 
 </div>
 
-
-</div>
 </body>
 </html>

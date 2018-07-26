@@ -13,22 +13,38 @@ import javax.servlet.http.HttpSession;
 
 import it.accenture.dao.ProdottoDaoImpl;
 import it.accenture.model.Prodotto;
-import it.accenture.model.Utente;
 
 public class Carrello extends HttpServlet {
-	
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Prodotto> listaCarrello = new ArrayList<>();
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		HttpSession sessione = req.getSession();
-		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-		int idUtente = utente.getIdUtente();
-		int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));
+		List<Prodotto> listaCarrello =(List<Prodotto>) sessione.getAttribute("listaCarrello");
 		ProdottoDaoImpl prodottoService = new ProdottoDaoImpl();
+		int idProdotto = Integer.parseInt(req.getParameter("idProdotto"));
+
 		Prodotto prodotto = prodottoService.dettaglioProdotto(idProdotto);
+		if (listaCarrello == null){
+			listaCarrello = new ArrayList<>();
+			
+			listaCarrello.add(prodotto);
+			
+		
+
+		}else if (!listaCarrello.contains(prodotto)){
+			
+			listaCarrello.add(prodotto);
+
+			
+		
+
+		}
+		sessione.setAttribute("listaCarrello", listaCarrello);
+
+
 		prodottoService.close();
-		listaCarrello.add(prodotto);
-		req.setAttribute("listaCarrello", listaCarrello);
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("carrello.jsp");
 		dispatcher.forward(req, resp);
 	}

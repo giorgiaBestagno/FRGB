@@ -18,7 +18,7 @@
 <body>
 <% Utente utenteLoggato = (Utente) session.getAttribute ("utenteLoggato"); %>
 <%List<Prodotto> listaProdottiDisponibili = (List<Prodotto>) request.getAttribute("listaProdottiDisponibili"); %>
-
+<% List<Prodotto> listaCarrello =(List<Prodotto>) session.getAttribute("listaCarrello"); %>
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
 <a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
@@ -63,7 +63,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout " style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="" style="color: white">Carrello</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
@@ -88,8 +88,9 @@
 <%}else if( listaProdottiDisponibili.isEmpty()) { %>
 <h2>Lista vuota</h2>
 <% } else { %>
+<ul>b 
 <% for (Prodotto prodottoDisponibile : listaProdottiDisponibili) { %>
-<ul>
+
 <li>
 <p>
 Id Prodotto : <%=prodottoDisponibile.getIdProdotto() %>
@@ -108,9 +109,14 @@ disabled
 <%} %>
 >
 </form>
-<form action="carrello" method="post">
-<input type="hidden" name="idProdotto" value="<%=prodottoDisponibile.getIdProdotto()%>">
-<input type="submit" value="Aggiungi al carrello" >
+<form action="carrello" method="get">
+<input type="hidden" name="idProdotto" id="idProdotto" value="<%=prodottoDisponibile.getIdProdotto()%>">
+<input type="submit" value="Aggiungi al carrello"  <% if(utenteLoggato != null) {%>
+class="btn btn-success"
+<% }else{%>
+class="btn btn-warning"
+disabled
+<%} %>>
 </form>
 <form action="dettagliProdotto" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodottoDisponibile.getIdProdotto()%>">

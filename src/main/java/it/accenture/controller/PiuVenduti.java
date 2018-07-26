@@ -24,7 +24,6 @@ public class PiuVenduti extends HttpServlet {
 		List<Prodotto> listaPiuVenduti = new ArrayList<>();
 		ProdottoDaoImpl prodottoService = new ProdottoDaoImpl();
 		listaPiuVenduti = prodottoService.getByCount();
-		System.out.println(listaPiuVenduti);
 		prodottoService.close();
 		sessione.setAttribute("listaPiuVenduti", listaPiuVenduti);
 		

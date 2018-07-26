@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="css/stile.css">
 <script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type = "text/javascript" src="js/gestioneForm.js"></script>
+
 </head>
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
 <%Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
@@ -60,9 +62,9 @@
 
 </div>
 
-<form action="acquista" method="post" class= "form-group" >
+<form action="acquista" method="post" class= "form-group" onsubmit="return controlloDisponibilita()" >
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
-<input type="hidden" name="quantitaDisponibile" value="<%=prodotto.getQuantitaDisponibile()%>">
+<input type="hidden" id ="quantitaDisponibile" name="quantitaDisponibile" value="<%=prodotto.getQuantitaDisponibile()%>">
 
 
 
@@ -93,12 +95,12 @@
 
 
 
-<input type="submit" value="Conferma" class="btn btn-primary" onsubmit="return controlloDisponibilita()">
+<input type="submit" value="Conferma" class="btn btn-primary" >
 </form>
 
 <!-- alert -->
 <div class="alert alert-danger" id="alert" style="display:none"> 
-<p class="text-center">La quantità dispondibile è minore della quantità desiderata</p>
+<p class="text-center">La quantità richiesta è maggiore della quantità disponibile!</p>
 </div>
 
 

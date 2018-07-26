@@ -1,3 +1,4 @@
+<%@page import="it.accenture.model.Recensione"%>
 <%@page import="it.accenture.model.Prodotto"%>
 <%@page import="it.accenture.model.Utente"%>
 <%@page import="it.accenture.model.Acquisto"%>
@@ -19,8 +20,7 @@
 <body>
 <% Utente utenteLoggato = (Utente)session.getAttribute("utenteLoggato"); %>
 <% List<Acquisto> listaAcquisti = (List<Acquisto>) request.getAttribute("listaAcquisti"); %>
-
-
+<% Recensione recensione = (Recensione) request.getAttribute("recensione"); %>
 
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
@@ -68,7 +68,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout " style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
+<li><a href ="carrello" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 
 
@@ -99,46 +99,60 @@
 <p>Data inizio : <%=acquisto.getDataInizio() %></p>
 <p>Data Consegna : <%=acquisto.getDataFine() %></p>
 <p>Quantità acquistata : <%=acquisto.getQuantitaAcquistata() %></p>
+
 </div>
 
 
+
 <form action="acquista" method="get">
-<input type="hidden" name="idProdotto" value="<%=acquisto.getIdProdotto()%>">
-<input type="submit" value="Acquista di nuovo" <% if(utenteLoggato != null) {%>
+<input type="hidden" id="idProdotto" value="<%=acquisto.getIdProdotto()%>">
+<input type="submit"  id="idProdotto" value="Acquista di nuovo" <% if(utenteLoggato != null) {%>
 class="btn btn-success"
 <% }else{%>
 class="btn btn-warning"
 disabled
-
 <%} %>> 
 
 </form>
-<!--  da finire -->
-<form action="recensioni" method="get">
+
+<form action="recensioni" method="get" class = "form-horizontal">
 <input type="hidden" name="idProdotto" value="<%=acquisto.getIdProdotto()%>">
 
 <h4> Inserisci Nuova Recensione</h4>
 
+<div class="form-group">
 <label for="titolo" >Titolo</label>
+<br>
 <input type="text" id="titolo" name="titolo">
+</div>
+<div class="form-group">
+<label for="contenuto" >Testo Recensione</label>
+<br>
+<textarea rows="4" cols="20" id="contenuto" name="contenuto" maxlength="240"></textarea>
+</div>
+<div class="form-group">
+<input type="submit" name="recensione" value="Aggiungi recensione">
 
-<label for="testo" >Testo Recensione</label>
-<textarea rows="4" cols="20" name="testo" maxlength="240"></textarea>
 
 
-<input type="submit" value="Aggiungi recensione" > 
+
+</div>
+
 </form>
 
+
+
+
+<%} %>
+
 <%} %>
 
 
-<%} %>
-
 </div>
 
-
-
-
 </div>
+ 
+
+
 </body>
 </html>

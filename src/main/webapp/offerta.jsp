@@ -62,7 +62,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout" style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
+<li><a href ="carrello" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
@@ -114,7 +114,7 @@ disabled
 <%} %>
 >
 </form>
-<form action="carrello" method="post">
+<form action="carrello" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
 <input type="submit" value="Aggiungi al carrello" >
 </form>

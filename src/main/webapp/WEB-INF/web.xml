@@ -180,6 +180,17 @@
 		<url-pattern>/recensioni</url-pattern>
 		</servlet-mapping>
 		
+		<!-- RECENSIONE UPDATE -->
+			<servlet>
+		<servlet-name>RecensioneUpdate</servlet-name>
+		<servlet-class>it.accenture.controller.RecensioneUpdate</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>RecensioneUpdate</servlet-name>
+		<url-pattern>/recensioneUpdate</url-pattern>
+		</servlet-mapping>
+		
+			
 			
 		<!-- RISULTATO -->
 			<servlet>

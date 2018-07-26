@@ -1,3 +1,5 @@
+<%@page import="it.accenture.model.Prodotto"%>
+<%@page import="java.util.List"%>
 <%@page import="it.accenture.model.Utente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -13,6 +15,7 @@
 </head>
 
 <body>
+<% List<Prodotto> listaCarrello = (List<Prodotto>) session.getAttribute("listaCarrello"); %>
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
 <% Utente utente = (Utente) request.getAttribute("utente"); %>
 <nav class="nav navbar-inverse ">

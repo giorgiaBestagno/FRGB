@@ -12,8 +12,28 @@ public class Prodotto {
 	private int quantitaDisponibile;
 	private String immagine;
 	
-	
-	
+	@Override
+	public boolean equals (Object object){
+		if(this == object){
+			return true;
+				
+		}
+		if(object == null){
+			
+			return false;
+			}
+		
+		if(this.getClass() != object.getClass()){
+			return false;
+		}
+		Prodotto prodotto = (Prodotto) object;
+		if(this.idProdotto == prodotto.idProdotto){
+		
+		return true;
+		}else{
+			return false;
+		}
+	}
 	
 	
 	public int getIdProdotto() {

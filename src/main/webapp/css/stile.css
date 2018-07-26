@@ -45,3 +45,7 @@ div.collapse navbar-collapse {
     height: 30px;
     background-color: green;
 }
+
+.navbar-nav>li>a {
+	
+	line-height: 0;

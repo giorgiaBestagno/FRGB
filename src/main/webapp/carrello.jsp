@@ -16,8 +16,9 @@
 
 <body>
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
-<% List<Prodotto> listaCarrello = (List<Prodotto>) request.getAttribute("listaCarrello"); %>
+<% List<Prodotto> listaCarrello = (List<Prodotto>) session.getAttribute("listaCarrello"); %>
 <%Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
+
 
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
@@ -77,10 +78,19 @@
 <h1>Carrello</h1>
 
 <div>
-<%for (Prodotto prodottoCarrello : listaCarrello) {%>
-<%if (listaCarrello.isEmpty()) {%>
-<p>Lista vuota </p>
+
+
+
+<%if (listaCarrello == null) {%>
+
+<h4>Non ci sono prodotti nel carrello</h4>
+
 <%}else{ %>
+
+Totale prodotti nel carrello: <%=((List<Prodotto>) (session.getAttribute("listaCarrello"))).size()%>
+<%for (Prodotto prodottoCarrello : listaCarrello) {%>
+
+
 
 <div class="list-group-item">
 <p>Id prodotto : <%= prodottoCarrello.getIdProdotto() %></p>
@@ -90,13 +100,11 @@
 <p>Prezzo : <%= prodottoCarrello.getPrezzo() %></p>
 <p>Offerta : <%= prodottoCarrello.isOfferta() %></p>
 <p>Sconto : <%= prodottoCarrello.getSconto() %> &#37</p>
-<p>Quantità prodottoCarrello : <%= prodottoCarrello.getQuantitaDisponibile()%> </p>
 <img src="<%=prodottoCarrello.getImmagine() %>">
-</div>
-<%} %>
-
 <form action="acquista" method="get">
+
 <input type="hidden" name="idProdotto" value="<%=prodottoCarrello.getIdProdotto()%>">
+
 <input type="submit" value="Acquista" <% if(utenteLoggato != null) {%>
 class="btn btn-success"
 <% }else{%>
@@ -105,7 +113,14 @@ disabled
 <%} %>
 >
 </form>
+
 <%} %>
+<%} %>
+
+
+</div>
+
+
 </div>
 
 

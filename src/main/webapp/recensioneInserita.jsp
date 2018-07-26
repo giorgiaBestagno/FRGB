@@ -1,24 +1,21 @@
-<%@page import="it.accenture.model.Recensione"%>
 <%@page import="it.accenture.model.Utente"%>
-<%@page import="it.accenture.model.Prodotto"%>
-<%@page import="java.util.List" %>
-
+<%@page import="it.accenture.model.Recensione"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Dettagli Prodotto</title>
+<title>Recensione Inserita</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/stile.css">
 <script type="text/javascript" src="jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<% Utente utenteLoggato = (Utente) session.getAttribute ("utenteLoggato"); %>
-<% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
-<%List<Recensione> listaRecensioni = (List<Recensione>) request.getAttribute ("listaRecensioni"); %>
+<% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
+<%Recensione recensione = (Recensione) request.getAttribute("recensione"); %>
+
 <nav class="nav navbar-inverse">
 <div class="navbar-header ">
 <a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
@@ -26,13 +23,8 @@
 
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<form action="listaProdottiNomiSimili" method="get">
-<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
-<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
-<span class="glyphicon glyphicon-search"></span> Cerca 
-</button>
-
-</form>
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" id="cerca" size= 30px>
+<input type="submit" name="cerca" id="cerca" value="Cerca" style="background-color: white" onsubmit="risultato.jsp">
 <li><a href=" contatti" style="color: white">Contatti</a></li>
 <%if (utenteLoggato == null){ %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
@@ -78,43 +70,10 @@
 </div>
 
 </nav>
-<div class="container">
-<div class = "page-header text-center" >
-<h1>Dettagli Prodotto</h1>
-</div>
 
-<!-- Dettagli Prodotto -->
-<div class="list-group">
+<h1>Recensione inserita/aggiornata con successo!</h1>
+<h2>Titolo: <%=recensione.getTitolo() %></h2>
+<h2>Contenuto: <%=recensione.getContenuto() %></h2>
 
-<div class="list-group-item">
-<p>Id prodotto : <%= prodotto.getIdProdotto() %></p>
-<p>Nome : <%= prodotto.getNome() %></p>
-<p>Categoria : <%= prodotto.getCategoria().toString() %></p>
-<p>Marca : <%= prodotto.getMarca() %></p>
-<p>Prezzo : <%= prodotto.getPrezzo() %></p>
-<p>Offerta : <%= prodotto.isOfferta() %></p>
-<p>Sconto : <%= prodotto.getSconto() %> &#37</p>
-<p>Quantità disponibile : <%= prodotto.getQuantitaDisponibile()%> </p>
-<p>Recensioni : <% for (Recensione recensione : listaRecensioni) {%>
-<%=recensione.getTitolo() %>
-<%=recensione.getContenuto() %>
-
-<%} %>
-</p>
-
-<div class="zoomin">
-
-  <img  src= "<%=prodotto.getImmagine() %>"  >
- </div>
- 
-
-
-</div>
-
-
-</div>
-
-
-</div>
 </body>
 </html>

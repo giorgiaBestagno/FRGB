@@ -69,7 +69,7 @@ function validazioneLogin(){
 		var quantitaDesiderata = document.getElementById("quantita").value;
 		var quantitaDisponibile = document.getElementById("quantitaDisponibile").value;
 		console.log('quantita');
-		console.log('quantitaDisponibile')
+		console.log('quantitaDisponibile');
 		if(quantitaDesiderata <= quantitaDisponibile){
 			
 			return true;
@@ -81,8 +81,7 @@ function validazioneLogin(){
 		return false;
 		}
 	}
-	
-		
+
 		
 	
 

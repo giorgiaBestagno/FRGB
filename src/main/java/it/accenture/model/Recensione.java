@@ -14,8 +14,11 @@ public class Recensione {
 	
 	
 	
+	public Recensione() {
+	
+	}
+
 	public Recensione(String titolo, String contenuto, int idUtente, int idProdotto) {
-		super();
 		this.titolo = titolo;
 		this.contenuto = contenuto;
 		this.idUtente = idUtente;

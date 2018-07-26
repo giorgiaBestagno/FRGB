@@ -66,7 +66,7 @@
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
 <li><a href ="logout" style="color: white">Logout</a></li>
 <li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
-<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
+<li><a href ="carrello" style="color: white">Carrello</a></li>
 <li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
 <li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
 
@@ -99,8 +99,24 @@
 </div>
 
 
-<div class="progress"  id="progress" style="width:500px">
-  <div id="myBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress">
+<%if(acquisto.getDataInizio().equals(LocalDate.now())){ %>
+  <div id="bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+  aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
+    10% 
+  </div>
+  <%}else if((acquisto.getSpedizione().toString().equalsIgnoreCase("express") && acquisto.getDataFine().equals(LocalDate.now()))||acquisto.getDataFine().equals(LocalDate.now().minusDays(1))){ %>
+  <div id="bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    100% 
+  </div>
+  
+  <%} else { %>
+  <div id="bar" class="progress-bar progress-bar-danger" role="progressbar"
+  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    100%
+  </div>
+  <%} %>
 </div>
 
 
@@ -108,6 +124,8 @@
 <%} %>
 <%} %>
 </div>
+
+
 
 
 
