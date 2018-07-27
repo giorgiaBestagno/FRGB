@@ -66,7 +66,7 @@
 
 <label for="password">Inserisci Nuova Password</label>
 <input type="password" id="password" name="password">
-<input type="submit" value="Cambia Password">
+<input type="submit" value="Cambia Password" id="password">
 <br>
 
 </form>
@@ -75,7 +75,7 @@
 
 <label for="indirizzo" >Inserisci Nuovo Indirizzo</label>
 <input type="text" id="indirizzo" name="indirizzo">
-<input type="submit" value="Cambia Indirizzo" >
+<input type="submit" value="Cambia Indirizzo" id="indirizzo" >
 <br>
 </form>
 

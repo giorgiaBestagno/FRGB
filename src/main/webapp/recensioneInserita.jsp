@@ -89,7 +89,7 @@
 <label type="text" for="contenuto">Nuovo Testo</label>
 <textarea rows="4" cols="20" id="contenuto" name="contenuto" maxlength="240"></textarea>
 </div>
-<input type="submit" value="Aggiorna Recensione">
+<input type="submit" value="Aggiorna Recensione" id="aggiornaRecensione">
 </form>
 
 

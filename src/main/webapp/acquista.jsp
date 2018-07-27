@@ -95,7 +95,7 @@
 
 
 
-<input type="submit" value="Conferma" class="btn btn-primary" >
+<input type="submit" value="Conferma" id="conferma" class="btn btn-primary" >
 </form>
 
 <!-- alert -->

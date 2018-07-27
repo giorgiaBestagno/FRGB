@@ -148,6 +148,82 @@ color: black;
 
 }
 
+#dettagli{
+	    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+
+#carrello{
+	    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+#acquista{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+
+#conferma{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+
+#acquistaDiNuovo{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+#recensione{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+
+#aggiornaRecensione{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+#password{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
+#indirizzo{
+		    border-radius: 40px;
+    padding: 1%;
+    border: 1px solid grey;
+    text-shadow: 0 0 black;
+background-color : #808080;
+color: white;
+}
 
 form {
 	margin-bottom: 10px;
