@@ -95,6 +95,7 @@
 <p>Id acquisto : <%= acquisto.getIdAcquisto() %></p>
 <p>Spedizione : <%= acquisto.getSpedizione().toString() %></p>
 <p>Data inizio : <%= acquisto.getDataInizio() %></p>
+<p>Data di consegna prevista : <%= acquisto.getDataFine() %></p>
 <p>Quantità acquistata : <%= acquisto.getQuantitaAcquistata() %></p>
 </div>
 
@@ -105,16 +106,20 @@
   aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:10%">
     10% 
   </div>
-  <%}else if((acquisto.getSpedizione().toString().equalsIgnoreCase("express") && acquisto.getDataFine().equals(LocalDate.now()))||acquisto.getDataFine().equals(LocalDate.now().minusDays(1))){ %>
+  <%}else if((acquisto.getSpedizione().toString().equalsIgnoreCase("express") && acquisto.getDataFine().equals(LocalDate.now()))||acquisto.getDataFine().equals(LocalDate.now())){ %>
   <div id="bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
   aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
     100% 
   </div>
-  
+    <%} else if(!acquisto.getSpedizione().toString().equalsIgnoreCase("express") && acquisto.getDataFine().equals(LocalDate.now().plusDays(1))){ %>
+  <div id="bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+  aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+    90%
+</div>
   <%} else { %>
-  <div id="bar" class="progress-bar progress-bar-danger" role="progressbar"
-  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-    100%
+  <div id="bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+    50%
   </div>
   <%} %>
 </div>
