@@ -28,12 +28,12 @@
 
 <form action="listaProdottiNomiSimili" method="get">
 <input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
-<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<button type="submit" class="btn btn-default btn-sm" name="cerca" id="cerca"  value="Cerca" style="background-color: white">
 <span class="glyphicon glyphicon-search"></span> Cerca 
 </button>
 
 </form>
-<li><a href="contatti.jsp" style="color: white">Contatti</a></li>
+
 <%if (utenteLoggato == null){ %>
 <li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
 <li><a href="login.jsp" style="color: white;" >Login</a></li>
@@ -57,7 +57,7 @@
 <option value="LIBRI">Libri</option> 
 <option value="SPORT">Sport</option> 
 </select>
-<input type= "submit" value="Vai">
+<input type= "submit" value="Vai" id="vai">
 </form>
 
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
@@ -69,7 +69,7 @@
 
 
 <%} %>
-
+<li><a href="contatti.jsp" style="color: white">Contatti</a></li>
 
 </ul>
 </div>
@@ -80,13 +80,13 @@
 
 <div class="container">
 <div class = "page-header text-center" >
-<h1>Shop Online</h1>
+<h1>FRGB Shop Online</h1>
 
 <div class=" carousel-inner">
 <div class="item active"> 
 
 
-<!-- primo carousel per utente non loggato -->
+<!-- primo carousel -->
 
 
 <div class="carousel slide" id="myCarousel" data-ride="carousel" data-interval="5000"> 
@@ -99,7 +99,7 @@
 <img src="img/ecommerce1.jpg" class="img-carousel">
 </div>
 <div class="item">
-<img src="img/ecommerce2.jpg" class="img-carousel">
+<img src="img/palle.jpg" class="img-carousel">
 </div>
 <div class="item">
 <img src="img/ecommerce3.jpg" class="img-carousel">
@@ -119,6 +119,10 @@
 </a>
 
 </div>
+<br>
+<br>
+<br>
+<br>
 
 <!-- fine primo carousel  -->
 

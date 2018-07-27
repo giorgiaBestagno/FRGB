@@ -22,14 +22,17 @@
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
 <nav class="nav navbar-inverse">
 <div class="navbar-header">
-<a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
+<a href="index.jsp" class="navbar-brand" style="color: white">Home</a></li>
+
+<br>
+
 <form action="listaProdottiNomiSimili" method="get">
 <input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
 <button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
 <span class="glyphicon glyphicon-search"></span> Cerca 
 </button>
-
 </form>
+
 <li><a href="contatti" style="color: white">Contatti</a></li>
 </div>
 <div class="collapse navbar-collapse">
@@ -86,8 +89,8 @@ value="<%=password%>"
 <div class="form-group">
 <span class="col-md-4"></span>
 <div class="col-md-5">
-<input type="submit" value="Login" class="btn btn-primary">
-<input type="reset" value="Ripristina" class="btn btn-warning" style="margin-left:2%;">
+<input type="submit" value="Login" id="login" >
+<input type="reset" id="reset" value="Ripristina" class="btn btn-warning" style="margin-left:2%;">
 </div>
 <span class="col-md-3"></span>
 </div>

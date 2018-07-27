@@ -16,9 +16,9 @@
 <body>
 <% Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); %>
 <%Recensione recensione = (Recensione) request.getAttribute("recensione"); %>
-<%List<Recensione> listaRecensioni = (List<Recensione> ) request.getAttribute("listaRecensioni"); %>
+<%Integer idRecensione = (Integer) request.getAttribute("idRecensione"); %>
 
-<%if(recensione == null){ %>
+<%if(recensione == null && idRecensione != null ){ %>
 
 
 
@@ -78,9 +78,22 @@
 </nav>
 
 <h1>Impossibile inserire la recensione, perché già presente</h1>
+<!-- <li>Puoi aggiornare la recensione <a href="recensioneUpdate">qui</a> -->
+
+<h3>Puoi aggiornare la recensione</h3>
+
+<form action="recensioneUpdate" method="get">
+<div class="form-group">
+
+<input type="hidden" name="idRecensione" id="idRecensione" value="<%=idRecensione %>">
+<label type="text" for="contenuto">Nuovo Testo</label>
+<textarea rows="4" cols="20" id="contenuto" name="contenuto" maxlength="240"></textarea>
+</div>
+<input type="submit" value="Aggiorna Recensione">
+</form>
 
 
-<%}else{ %>
+<%}else if(recensione != null && idRecensione == null){ %>
 <h1>Recensione inserita/aggiornata con successo!</h1>
 <h2>Titolo: <%=recensione.getTitolo() %></h2>
 <h2>Contenuto: <%=recensione.getContenuto() %></h2>

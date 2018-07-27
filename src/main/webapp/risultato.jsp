@@ -88,7 +88,7 @@
 <%}else if( listaProdottiDisponibili.isEmpty()) { %>
 <h2>Lista vuota</h2>
 <% } else { %>
-<ul>b 
+<ul>
 <% for (Prodotto prodottoDisponibile : listaProdottiDisponibili) { %>
 
 <li>

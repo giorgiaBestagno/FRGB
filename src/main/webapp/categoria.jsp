@@ -20,7 +20,63 @@
 <body>
 
 <% Utente utenteLoggato = (Utente) session.getAttribute ("utenteLoggato"); %>
+<nav class="nav navbar-inverse">
+<div class="navbar-header ">
+<a href="index.jsp" class="navbar-brand" style="color: white">Home</a>
+</div>
 
+<div class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+
+<form action="listaProdottiNomiSimili" method="get">
+<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<button type="submit" class="btn btn-default btn-sm" name="cerca" id="cerca" value="Cerca" style="background-color: white">
+<span class="glyphicon glyphicon-search"></span> Cerca 
+</button>
+
+</form>
+<li><a href="contatti.jsp" style="color: white">Contatti</a></li>
+<%if (utenteLoggato == null){ %>
+<li><a href="registrazione.jsp" style="color: white">Registrazione</a></li>
+<li><a href="login.jsp" style="color: white;" >Login</a></li>
+
+
+<% }else { %>
+
+<form action="categoria" method="get">
+
+<label style="color:white;">Categorie</label>
+<select name="scelta">
+<option value="#" selected="selected">------</option>
+<option value="ABBIGLIAMENTO" >Abbigliamento</option> 
+<option value="ARTE" >Arte</option> 
+<option value="CASA">Casa</option> 
+<option value="CUCINA">Cucina</option> 
+<option value="ELETTRONICA">Elettronica</option> 
+<option value="FILM">Film</option> 
+<option value="GIARDINAGGIO">Giardinaggio</option> 
+<option value="GIOCATTOLI">Giocattoli</option> 
+<option value="LIBRI">Libri</option> 
+<option value="SPORT">Sport</option> 
+</select>
+<input type= "submit" value="Vai">
+</form>
+
+<li><a href="accountDati" style="color: white">Il Mio Account </a></li>
+<li><a href ="logout " style="color: white">Logout</a></li>
+<li><a href ="offerta" style="color: #e663cf">Prodotti In Offerta</a></li>
+<li><a href ="carrello.jsp" style="color: white">Carrello</a></li>
+<li><a href ="listaOrdini" style="color: white">Ordini In Corso</a></li>
+<li><a href ="listaAcquisti" style="color: white">I Miei Acquisti</a></li>
+
+
+<%} %>
+
+
+</ul>
+</div>
+
+</nav>
 
 
 <%String cat =  request.getParameter("scelta"); %>

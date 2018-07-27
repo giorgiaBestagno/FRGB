@@ -30,7 +30,7 @@
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
 <form action="listaProdottiNomiSimili" method="get">
-<input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
+<input type="text" minlength="2" placeholder="Cerca" id="cerca" name="cerca" size= 30px>
 <button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
 <span class="glyphicon glyphicon-search"></span> Cerca 
 </button>
@@ -107,7 +107,7 @@
 <form action="acquista" method="get">
 <input type="hidden" id="idProdotto" value="<%=acquisto.getIdProdotto()%>">
 <input type="submit"  id="idProdotto" value="Acquista di nuovo" <% if(utenteLoggato != null) {%>
-class="btn btn-success"
+class="btn"
 <% }else{%>
 class="btn btn-warning"
 disabled
@@ -131,7 +131,7 @@ disabled
 <textarea rows="4" cols="20" id="contenuto" name="contenuto" maxlength="240"></textarea>
 </div>
 <div class="form-group">
-<input type="submit" id="recensione" value="Aggiungi recensione" >
+<input type="submit" id="recensione" value="Aggiungi recensione" style="color: white">
 
 
 

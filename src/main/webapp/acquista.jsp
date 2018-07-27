@@ -33,7 +33,7 @@
 <ul class="nav navbar-nav">
 <form action="listaProdottiNomiSimili" method="get">
 <input type="text" minlength="2" placeholder="Cerca" name="cerca" size= 30px>
-<button type="submit" class="btn btn-default btn-sm" name="cerca"  value="Cerca" style="background-color: white">
+<button type="submit" class="btn btn-default btn-sm" name="cerca" id="cerca"  value="Cerca" style="background-color: white">
 <span class="glyphicon glyphicon-search"></span> Cerca 
 </button>
 

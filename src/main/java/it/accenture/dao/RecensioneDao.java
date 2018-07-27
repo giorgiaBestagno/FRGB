@@ -10,10 +10,13 @@ public interface RecensioneDao {
 
 	public void insertRecensione (Recensione recensione);
 		
-	public void updateRecensione (int idRecensione, String contenuto);
+	public void updateRecensione(int idRecensione, String contenuto);
+	
 	public List<Recensione> getAllRecensioni(int idProdotto);
 	
-	public List<Recensione> getAllRecensioni(int idUtente, int idProdotto);
+	public Recensione getById(int idRecensione);
+	
+	public Recensione getByIdUtenteAndIdProdotto(int idUtente, int idProdotto);
 	
 	public Recensione getRecensioneByIdUtente(int idProdotto, int idUtente);
 

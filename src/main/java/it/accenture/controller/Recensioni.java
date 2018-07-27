@@ -35,20 +35,18 @@ public class Recensioni extends HttpServlet{
 			Recensione recensione = new Recensione(titolo, contenuto, idUtente, idProdotto);
 
 			 RecensioneDaoImpl recensioneService = new RecensioneDaoImpl();
-				List<Recensione> listaRecensioni = 	recensioneService.getAllRecensioni(idUtente, idProdotto);
+			Recensione recensione2 = recensioneService.getByIdUtenteAndIdProdotto(idUtente, idProdotto);
 
 
 		
-			if(listaRecensioni == null){
-				listaRecensioni = new ArrayList<>();
-				listaRecensioni.add(recensione);
-				
+			if(recensione2 != null && recensione2.equals(recensione)){
+				int idRecensione = recensione2.getIdRecensione();
+				req.setAttribute("idRecensione", idRecensione);			
           	
           	
           	
-			}else if(!listaRecensioni.contains(recensione)){
+			}else {
 	
-				listaRecensioni.add(recensione);
 				recensioneService.insertRecensione(recensione);	
 				req.setAttribute("recensione", recensione);
 			}
@@ -56,8 +54,7 @@ public class Recensioni extends HttpServlet{
 		
 			recensioneService.close();
 
-			req.setAttribute("listaRecensioni", listaRecensioni);
-		
+			
 
 			 RequestDispatcher dispatcher = req.getRequestDispatcher("recensioneInserita.jsp");
 				dispatcher.forward(req, resp);

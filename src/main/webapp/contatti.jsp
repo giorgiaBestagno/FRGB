@@ -34,7 +34,7 @@
 
 </nav>
 
-<h1 style="margin: 40px; color: #e663cf">Contatti</h1>
+<h1 style="margin: 40px; color: black">Contatti</h1>
 <div style="margin: 50px">
 <h4>
 FRGB</h4>
@@ -50,7 +50,7 @@ Dallo sport, all'arte, ai libri e tanto altro.</p><br>
 <p style="bold">Indirizzo:</p><p> Via Meravigli, 6, 20123 Milano (MI), Italy</p>
 
 </div>
-<h2 style="margin: 40px; color: #e663cf">Dove siamo</h2>
+<h2 style="margin: 40px; color: black">Dove siamo</h2>
 <div id="googleMap" style="width:100%;height:400px;"></div>
 
 <script>
