@@ -56,7 +56,7 @@
 <option value="SPORT">Sport</option> 
 
 </select>
-<input type= "submit" value="Vai">
+<input type= "submit" value="Vai" id="vai">
 </form>
 
 <li><a href="accountDati" style="color: white">Il Mio Account </a></li>
@@ -88,8 +88,9 @@
 <h2>Lista vuota</h2>
 
 <% } else { %>
-<% for (Prodotto prodotto : listaProdottiOfferta) { %>
 <ul>
+
+<% for (Prodotto prodotto : listaProdottiOfferta) { %>
 <li>
 <p>
 Id Prodotto : <%=prodotto.getIdProdotto() %>
@@ -106,7 +107,7 @@ Quantità disponibile : <%=prodotto.getQuantitaDisponibile() %><br>
 
 <form action="acquista" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
-<input type="submit" value="Acquista" <% if(utenteLoggato != null) {%>
+<input type="submit" value="Acquista" id="acquista" <% if(utenteLoggato != null) {%>
 class="btn btn-success"
 <% }else{%>
 class="btn btn-warning"
@@ -116,11 +117,11 @@ disabled
 </form>
 <form action="carrello" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
-<input type="submit" value="Aggiungi al carrello" >
+<input type="submit" id="carrello" value="Aggiungi al carrello" >
 </form>
 <form action="dettagliProdotto" method="get">
 <input type="hidden" name="idProdotto" value="<%=prodotto.getIdProdotto()%>">
-<input type="submit" " value="Dettagli Prodotto" >
+<input type="submit" id="dettagli" value="Dettagli Prodotto" >
 </form>
 
 </p>

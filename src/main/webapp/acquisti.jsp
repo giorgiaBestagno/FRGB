@@ -105,7 +105,7 @@
 
 
 <form action="acquista" method="get">
-<input type="hidden" id="idProdotto" value="<%=acquisto.getIdProdotto()%>">
+<input type="hidden" name= "idProdotto" id="idProdotto" value="<%=acquisto.getIdProdotto()%>">
 <input type="submit"  id="acquistaDiNuovo" value="Acquista di nuovo" <% if(utenteLoggato != null) {%>
 class="btn"
 <% }else{%>
